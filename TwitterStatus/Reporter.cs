@@ -29,8 +29,15 @@ namespace TwitterStatus
         {
             foreach(KeyValuePair<VersionedApplication, ApplicationStatus> entry in applicationStatuses)
             {
-                Console.WriteLine(entry.Key.Application + "," + entry.Key.Version);
+                Console.WriteLine(GetStatusOutput(entry.Key, entry.Value));
             }
+        }
+
+        private static string GetStatusOutput(VersionedApplication appVersion, ApplicationStatus status)
+        {
+            return appVersion.Application + "," 
+                + appVersion.Version + "," 
+                + status.SuccessRate;
         }
 
         private class VersionedApplication
@@ -78,6 +85,14 @@ namespace TwitterStatus
                 requestCount += status.requestCount;
                 successCount += status.successCount;
                 errorCount += status.errorCount;
+            }
+
+            public float SuccessRate
+            {
+                get
+                {
+                    return successCount / requestCount;
+                }
             }
         }
     }
