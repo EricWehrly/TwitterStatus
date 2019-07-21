@@ -40,8 +40,21 @@ namespace TwitterStatus
 
             public VersionedApplication(ServerStatus serverStatus)
             {
-                this.Application = serverStatus.Application;
-                this.Version = serverStatus.Version;
+                Application = serverStatus.Application;
+                Version = serverStatus.Version;
+            }
+
+            public override bool Equals(object obj)
+            {
+                VersionedApplication other = (VersionedApplication)obj;
+
+                return other.Application == Application
+                    && other.Version == Version;
+            }
+
+            public override int GetHashCode()
+            {
+                return Application.GetHashCode() + Version.GetHashCode();
             }
         }
 
@@ -55,16 +68,16 @@ namespace TwitterStatus
 
             public ApplicationStatus(ServerStatus serverStatus)
             {
-                this.requestCount = serverStatus.RequestsCount;
-                this.successCount = serverStatus.SuccessCount;
-                this.errorCount = serverStatus.ErrorCount;
+                requestCount = serverStatus.RequestsCount;
+                successCount = serverStatus.SuccessCount;
+                errorCount = serverStatus.ErrorCount;
             }
 
             public void AddStatus(ApplicationStatus status)
             {
-                this.requestCount += status.requestCount;
-                this.successCount += status.successCount;
-                this.errorCount += status.errorCount;
+                requestCount += status.requestCount;
+                successCount += status.successCount;
+                errorCount += status.errorCount;
             }
         }
     }
