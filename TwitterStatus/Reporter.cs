@@ -23,9 +23,14 @@ namespace TwitterStatus
             }
         }
 
+        // Assuming we want to write the report to the console rather than to disk,
+        // but we may want to have another method for 'exporting' the report
         public static void PrintStatuses()
         {
-            Console.WriteLine(applicationStatuses);
+            foreach(KeyValuePair<VersionedApplication, ApplicationStatus> entry in applicationStatuses)
+            {
+                Console.WriteLine(entry.Key.Application + "," + entry.Key.Version);
+            }
         }
 
         private class VersionedApplication
