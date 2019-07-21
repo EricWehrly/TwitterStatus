@@ -8,7 +8,11 @@ namespace TwitterStatus
         {
             String[] hosts = ReadHostsFile();
 
-            // if hosts is empty ...
+            if(hosts.Length == 0)
+            {
+                Console.WriteLine("Could not read any hosts from server.txt.");
+                Environment.Exit(13);    // Exit code 13 for "invalid data"
+            }
 
             foreach(string host in hosts)
             {
@@ -28,7 +32,7 @@ namespace TwitterStatus
                 Console.WriteLine("Please try re-downloading or recreating the file.");
                 Console.Read();
                 
-                Environment.Exit(2);
+                Environment.Exit(2);    // Exit code 2 for "file not found"
             }
             
             return System.IO.File.ReadAllLines("server.txt");

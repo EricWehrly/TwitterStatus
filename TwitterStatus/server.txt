@@ -2,4 +2,5 @@ host0
 host578
 host572
 host576
+badhost
 host999
