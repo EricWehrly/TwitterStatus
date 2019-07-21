@@ -2,15 +2,25 @@
 {
     class ServerStatus
     {
-        public int RequestsCount { get; set; }
+        public int requests_count { get; set; }
         public string Application { get; set; }
         public string Version { get; set; }
-        public int SuccessCount { get; set; }
-        public int ErrorCount { get; set; }
+        public int success_count { get; set; }
+        public int error_count { get; set; }
 
-        public override string ToString()
+        public int RequestsCount
         {
-            return Application;
+            get { return requests_count; }
+        }
+
+        public int SuccessCount
+        {
+            get { return success_count; }
+        }
+
+        public int ErrorCount
+        {
+            get { return error_count; }
         }
     }
 }
