@@ -10,6 +10,14 @@ namespace TwitterStatus
     {
         static void Main(string[] args)
         {
+            ServerQuerier.GetStatus("host578", WriteMessage).Wait();
+
+            Console.Read();
+        }
+
+        private static void WriteMessage(ServerStatus message)
+        {
+            Console.WriteLine(message);
         }
     }
 }
