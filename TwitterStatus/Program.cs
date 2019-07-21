@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TwitterStatus
 {
@@ -10,11 +6,32 @@ namespace TwitterStatus
     {
         static void Main(string[] args)
         {
-            ServerQuerier.GetStatus("host578", AddStatus).Wait();
+            String[] hosts = ReadHostsFile();
+
+            // if hosts is empty ...
+
+            foreach(string host in hosts)
+            {
+                ServerQuerier.GetStatus(host, AddStatus).Wait();
+            }
 
             Reporter.PrintStatuses();
 
             Console.Read();
+        }
+
+        private static string[] ReadHostsFile()
+        {
+            if(!System.IO.File.Exists("server.txt"))
+            {
+                Console.WriteLine("server.txt not found in " + Environment.CurrentDirectory);
+                Console.WriteLine("Please try re-downloading or recreating the file.");
+                Console.Read();
+                
+                Environment.Exit(2);
+            }
+            
+            return System.IO.File.ReadAllLines("server.txt");
         }
 
         private static void AddStatus(ServerStatus status)

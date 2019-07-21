@@ -57,5 +57,10 @@
     <None Include="packages.config" />
     <None Include="README.md" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="server.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
